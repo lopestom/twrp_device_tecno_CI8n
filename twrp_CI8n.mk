@@ -29,7 +29,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/gsi_keys.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota.mk)
 
 # Inherit from TECNO-CI8n device
-$(call inherit-product, device/tecno/TECNO-CI8n/device.mk)
+$(call inherit-product, device/tecno/CI8n/device.mk)
 
 # Inherit some common TWRP stuff.
 $(call inherit-product, vendor/twrp/config/common.mk)
