@@ -16,9 +16,9 @@
 #
 
 PRODUCT_MAKEFILES := \
-     $(LOCAL_DIR)/twrp_TECNO-CI8n.mk
+     $(LOCAL_DIR)/twrp_CI8n.mk
 
-COMMON_LUNCH_CHOICES := twrp_TECNO-CI8n-eng
+COMMON_LUNCH_CHOICES := twrp_CI8n-eng
 #    twrp_TECNO-CI8n-eng \
 #    twrp_TECNO-CI8n-userdebug \
 #    twrp_TECNO-CI8n-user
