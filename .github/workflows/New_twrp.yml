@@ -14,9 +14,9 @@ on:
 
 env:
   MANIFEST: https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp -b twrp-12.1
-  DEVICE: TECNO-CI8n
+  DEVICE: CI8n
   DT_LINK: https://github.com/lopestom/twrp_device_tecno_CI8n
-  DT_PATH: device/tecno/TECNO-CI8n
+  DT_PATH: device/tecno/CI8n
   TARGET: bootimage
   TZ: Asia/manila
 
@@ -60,14 +60,14 @@ jobs:
        - name: Checkout device tree
          uses: actions/checkout@v2
          with:
-          path: twrp/device/tecno/TECNO-CI8n
+          path: twrp/device/tecno/CI8n
              
        - name: Build
          run: |
               PATH=~/bin:$PATH
               cd twrp
-              export ALLOW_MISSING_DEPENDENCIES=true && source build/envsetup.sh &&lunch twrp_TECNO-CI8n-eng && mka $TARGET -j$(nproc --all)
-              cp  out/target/product/TECNO-CI8n/boot.img    out/target/product/TECNO-CI8n/boot-TECNO-CI8n-A12-$(date +"%Y%m%d-Enc_Dec").img  
+              export ALLOW_MISSING_DEPENDENCIES=true && source build/envsetup.sh &&lunch twrp_CI8n-eng && mka $TARGET -j$(nproc --all)
+              cp  out/target/product/CI8n/boot.img    out/target/product/CI8n/boot-TECNO-CI8n-A12-$(date +"%Y%m%d-Enc_Dec").img  
              
        - name: Release recovery image
          uses: softprops/action-gh-release@v1
@@ -77,5 +77,5 @@ jobs:
           tag_name: TECNO_Camon_19_Pro-CI8n
           name: TWRP37x_12
           files: | 
-            twrp/out/target/product/TECNO-CI8n/boot*.img
-            twrp/out/target/product/TECNO-CI8n/ramdisk*.img
+            twrp/out/target/product/CI8n/boot*.img
+            twrp/out/target/product/CI8n/ramdisk*.img
