@@ -17,6 +17,6 @@
 
 LOCAL_PATH := $(call my-dir)
 
-ifeq ($(TARGET_DEVICE), TECNO-CI8n)
+ifeq ($(TARGET_DEVICE), CI8n)
 include $(call all-subdir-makefiles,$(LOCAL_PATH))
 endif
