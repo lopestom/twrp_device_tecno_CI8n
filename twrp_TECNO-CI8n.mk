@@ -36,8 +36,8 @@ $(call inherit-product, vendor/twrp/config/common.mk)
 
 
 ## Device identifier. This must come after all inclusions
-PRODUCT_DEVICE := TECNO-CI8n
-PRODUCT_NAME := twrp_TECNO-CI8n
+PRODUCT_DEVICE := CI8n
+PRODUCT_NAME := twrp_CI8n
 PRODUCT_BRAND := TECNO
 PRODUCT_MODEL := TECNO CI8n
 PRODUCT_MANUFACTURER := TECNO
