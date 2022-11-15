@@ -16,7 +16,7 @@
 #
 
 # Device path
-DEVICE_PATH := device/tecno/TECNO-CI8n
+DEVICE_PATH := device/tecno/CI8n
 
 # For building with minimal manifest
 ALLOW_MISSING_DEPENDENCIES := true
