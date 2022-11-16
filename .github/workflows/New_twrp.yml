@@ -67,7 +67,7 @@ jobs:
               PATH=~/bin:$PATH
               cd twrp
               export ALLOW_MISSING_DEPENDENCIES=true && source build/envsetup.sh &&lunch twrp_CI8n-eng && mka $TARGET -j$(nproc --all)
-              cp  out/target/product/CI8n/boot.img    out/target/product/CI8n/boot-TECNO-CI8n-A12-$(date +"%Y%m%d-Enc_Dec").img  
+              cp  out/target/product/CI8n/boot.img    out/target/product/CI8n/boot-TECNO-CI8n-A12-$(date +"%Y%m%d-noCrypt").img  
              
        - name: Release recovery image
          uses: softprops/action-gh-release@v1
