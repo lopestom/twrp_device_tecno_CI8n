@@ -3,6 +3,7 @@
 ## Status
 
 Specs [here](https://www.gsmarena.com/tecno_camon_19_pro-11618.php)
+MT6781 - Helio G96
 
 ## What's the history?
 The tester [abaza92](https://4pda.to/forum/index.php?showuser=4591571)
