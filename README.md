@@ -10,7 +10,7 @@ The tester [abaza92](https://4pda.to/forum/index.php?showuser=4591571)
 
 only install `boot-TECNO-CI8n-A12-20221116-noCrypt.img` test file to know if TWRP can start.
 
-This branch android-11 has ***encrypt/decrypt*** files and option to more test with that.
+This branch A12 not have encrypt/decrypt process and files. So the process to backup Data have vendor.img ***encryptable***.
 
 ![Tecno Camon 19 Pro](https://fdn2.gsmarena.com/vv/pics/tecno/tecno-camon-19-pro-2.jpg)
 
