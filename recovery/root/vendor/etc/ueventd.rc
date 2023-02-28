@@ -92,6 +92,9 @@
 /dev/elliptic0            0644   system     system
 /dev/elliptic1            0644   system     system
 #BSP: add ultrasound support CILHLJYQ-4 by yu.xiang5 20211220 end
+#vdec-fmt
+/dev/vdec-fmt   0660 media system
+/dev/fmt_sync   0660 system system
 
 # add the read write right of ttyUSB*
 /dev/bus/usb/*     	  0660   root       usb
