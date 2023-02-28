@@ -44,7 +44,7 @@ ENABLE_CPUSETS := true
 ENABLE_SCHEDBOOST := true
 
 # Bootloader
-TARGET_BOOTLOADER_BOARD_NAME := CY-CI8N-H816
+TARGET_BOOTLOADER_BOARD_NAME := TECNO-CI8n
 TARGET_NO_BOOTLOADER := true
 TARGET_USES_UEFI := true
 
@@ -107,7 +107,7 @@ BOARD_DTB_OFFSET := 0x0bc08000
 
 BOARD_FLASH_BLOCK_SIZE := 131072 # (BOARD_KERNEL_PAGESIZE * 64)
 BOARD_MKBOOTIMG_ARGS += --base $(BOARD_KERNEL_BASE)
-BOARD_MKBOOTIMG_ARGS += --pagesize $(BOARD_KERNEL_PAGESIZE)
+BOARD_MKBOOTIMG_ARGS += --pagesize $(BOARD_KERNEL_PAGESIZE) --board "CY-CI8N-H816"
 BOARD_MKBOOTIMG_ARGS += --ramdisk_offset $(BOARD_RAMDISK_OFFSET)
 BOARD_MKBOOTIMG_ARGS += --kernel_offset $(BOARD_KERNEL_OFFSET)
 BOARD_MKBOOTIMG_ARGS += --tags_offset $(BOARD_KERNEL_TAGS_OFFSET)
@@ -196,7 +196,7 @@ TW_DEFAULT_LANGUAGE := ru
 TW_EXTRA_LANGUAGES := false
 #TARGET_USE_CUSTOM_LUN_FILE_PATH := /config/usb_gadget/g1/functions/mass_storage.0/lun.%d/file
 TARGET_USE_CUSTOM_LUN_FILE_PATH := /config/usb_gadget/g1/functions/mass_storage.usb0/lun.%d/file
-TW_DEVICE_VERSION := Tecno Camon 19 Pro_221202V1668 by lopestom
+TW_DEVICE_VERSION := Tecno Camon 19 Pro_V1668 by lopestom
 TARGET_RECOVERY_LCD_BACKLIGHT_PATH := \"/sys/class/leds/lcd-backlight/brightness\"
 TW_BRIGHTNESS_PATH := /sys/class/leds/lcd-backlight/brightness
 TW_MAX_BRIGHTNESS := 255
@@ -208,7 +208,6 @@ TW_SKIP_COMPATIBILITY_CHECK := true
 #TW_SCREEN_BLANK_ON_BOOT := true
 TW_INPUT_BLACKLIST := "hbtp_vm"
 TW_USE_MODEL_HARDWARE_ID_FOR_DEVICE_ID := true
-#TW_USE_SERIALNO_PROPERTY_FOR_DEVICE_ID := true
 
 TW_EXCLUDE_APEX := true
 BOARD_USE_FRAMEBUFFER_ALPHA_CHANNEL := true
@@ -238,12 +237,18 @@ TARGET_SCREEN_HEIGHT := 2460
 TW_Y_OFFSET := 50
 TW_H_OFFSET := -50
 
+# Statusbar icons flags 1080 x 2400
+TW_STATUS_ICONS_ALIGN := center
+#TW_CUSTOM_CPU_POS := 50
+TW_CUSTOM_CLOCK_POS := 610
+#TW_CUSTOM_BATTERY_POS := 800
+
 # Debug
 TWRP_INCLUDE_LOGCAT := true
 TARGET_USES_LOGD := true
 
 #TW_CRYPTO_FS_TYPE := "f2fs"
-#TW_CRYPTO_REAL_BLKDEV := "/dev/block/platform/bootdevice/by-name/userdata"
+#TW_CRYPTO_REAL_BLKDEV := "/dev/block/by-name/metadata"
 #TW_CRYPTO_MNT_POINT := "/data"
 #TW_CRYPTO_FS_OPTIONS := "rw,lazytime,seclabel,nosuid,nodev,noatime,background_gc=on,discard,no_heap,user_xattr,inline_xattr,acl,inline_data,inline_dentry,extent_cache,mode=adaptive,active_logs=6,reserve_root=55451,resuid=0,resgid=1065,inlinecrypt,alloc_mode=default,fsync_mode=posix 0 0"
 #TW_CRYPTO_FS_OPTIONS := "rw,seclabel,nosuid,nodev,noatime,noauto_da_alloc,inlinecrypt,resgid=1065,errors=panic,data=ordered"
