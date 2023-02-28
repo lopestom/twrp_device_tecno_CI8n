@@ -1,4 +1,8 @@
 on init
+
+    mkdir /mnt/media_rw/usbotg 0700 media_rw media_rw
+    mkdir /storage/usbotg 0700 root root
+
     setprop sys.usb.configfs 1
     setprop sys.usb.ffs.aio_compat 1
     # pstore/ramoops previous console log
@@ -47,6 +51,13 @@ service mtk.plpath.utils.link /system/bin/mtk_plpath_utils
     disabled
     oneshot
     seclabel u:r:recovery:s0
+
+on post-fs-data
+    write /proc/bootprof "INIT:post-fs-data"
+
+    #SDD:add OTG feature for TESSCR-6368 by weike.xu 20210512 start
+    chmod 0666 /sys/devices/platform/odm/odm:tran_battery/OTG_CTL
+    #SDD:add OTG feature for TESSCR-6368 by weike.xu 20210512 end
 
 on boot
      start boot-hal-1-2
