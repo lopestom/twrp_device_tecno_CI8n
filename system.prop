@@ -1,6 +1,4 @@
 ####################################
-ro.product.first_api_level=31
-ro.board.first_api_level=30
 external_storage.projid.enabled=1
 external_storage.casefold.enabled=1
 external_storage.sdcardfs.enabled=0
@@ -14,7 +12,6 @@ ro.soc.manufacturer=Mediatek
 ro.mtk_key_manager_support=1
 ####################################
 ro.vendor.mediatek.platform=MT6781
-ro.hardware=mt6781
 ro.crypto.volume.filenames_mode=aes-256-cts
 ##
 ro.vendor.mtk_tee_gp_support=1
@@ -26,12 +23,6 @@ ro.vendor.mtk_f2fs_enable=1
 ro.vendor.mtk_emmc_support=1
 ro.vendor.mtk_ufs_support=1
 #
-ro.crypto.metadata.enabled=true
-ro.crypto.support_metadata_encrypt=true
-ro.crypto.uses_fs_ioc_add_encryption_key=true
-ro.crypto.volume.metadata.method=dm-default-key
-ro.crypto.dm_default_key.options_format.version=2
-ro.crypto.volume.options=::v2
 #others functions
 ro.secure=0
 ro.adb.secure=0
