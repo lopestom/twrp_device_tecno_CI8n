@@ -71,3 +71,5 @@
 # External-Devices (SDCARD | OTG)
 /external_sd    auto     /dev/block/mmcblk0p1  /dev/block/mmcblk0    flags=display="MicroSDcard";storage;wipeingui;removable;fsflags="utf8"
 /usb_otg        auto     /dev/block/sdd4      /dev/block/sdd         flags=display="Usb_Otg";storage;wipeingui;removable;fsflags="utf8"
+/usb_otg        auto     /dev/block/sdd4         flags=display="Usb_Otg";storage;wipeingui;removable;fsflags="utf8"
+/usb_otg        auto     /dev/block/sdd1         flags=display="Usb_Otg";storage;wipeingui;removable;fsflags="utf8"
