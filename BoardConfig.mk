@@ -1,6 +1,6 @@
 #
-# Copyright (C) 2022 The Android Open Source Project
-# Copyright (C) 2022 The TWRP Open Source Project
+# Copyright (C) 2023 The Android Open Source Project
+# Copyright (C) 2023 The TWRP Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -44,7 +44,7 @@ ENABLE_CPUSETS := true
 ENABLE_SCHEDBOOST := true
 
 # Bootloader
-TARGET_BOOTLOADER_BOARD_NAME := CY-CI8N-H816
+TARGET_BOOTLOADER_BOARD_NAME := TECNO-CI8n
 TARGET_NO_BOOTLOADER := true
 TARGET_USES_UEFI := true
 
@@ -55,44 +55,9 @@ TARGET_BOARD_PLATFORM := mt6781
 # Assert
 TARGET_OTA_ASSERT_DEVICE := TECNO-CI8n
 
-
-# File system type
-BOARD_HAS_LARGE_FILESYSTEM := true
-BOARD_BOOTIMAGE_PARTITION_SIZE := 0x2000000 # 33554432
-#BOARD_BOOTIMAGE_PARTITION_SIZE := 0x2800000 # 40000000
-#BOARD_SYSTEMIMAGE_PARTITION_TYPE := ext4
-BOARD_SYSTEMIMAGE_FILE_SYSTEM_TYPE := ext4
-#BOARD_SYSTEMIMAGE_PARTITION_SIZE := 0x65DF9000
-BOARD_SYSTEM_EXTIMAGE_FILE_SYSTEM_TYPE := ext4
-BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE := f2fs
-#BOARD_USERDATAIMAGE_PARTITION_SIZE := 0x1AE14F8000
-BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
-#BOARD_VENDORIMAGE_PARTITION_SIZE := 0x25B86000
-BOARD_PRODUCTIMAGE_FILE_SYSTEM_TYPE := ext4
-
-# Partitions
-TARGET_USERIMAGES_USE_EXT4 := true
-TARGET_USERIMAGES_USE_F2FS := true
-
-# Workaround for copying error vendor files to recovery ramdisk
-TARGET_COPY_OUT_PRODUCT := product
-TARGET_COPY_OUT_VENDOR := vendor
-TARGET_COPY_OUT_SYSTEM_EXT = system_ext
-
-# Dynamic Partitions
-BOARD_SUPER_PARTITION_SIZE := 6873469036
-BOARD_SUPER_PARTITION_GROUPS := main
-BOARD_MAIN_SIZE := 6869274732 # (BOARD_SUPER_PARTITION_SIZE - 4194304 - 4MB)
-BOARD_MAIN_PARTITION_LIST := system vendor product system_ext
-
-# System as root
-BOARD_BUILD_SYSTEM_ROOT_IMAGE := false
-BOARD_SUPPRESS_SECURE_ERASE := true
-
 # Kernel
-BOARD_KERNEL_CMDLINE := bootopt=64S3,32N2,64N2 buildvariant=user
+BOARD_KERNEL_CMDLINE := bootopt=64S3,32N2,64N2
 BOARD_KERNEL_CMDLINE += androidboot.force_normal_boot=1
-#BOARD_KERNEL_CMDLINE += androidboot.boot_device=bootdevice
 BOARD_KERNEL_IMAGE_NAME := Image.gz
 TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/Image.gz
 TARGET_PREBUILT_DTB := $(DEVICE_PATH)/prebuilt/dtb.img
@@ -105,9 +70,12 @@ BOARD_KERNEL_PAGESIZE := 2048
 BOARD_RAMDISK_OFFSET := 0x07c08000
 BOARD_DTB_OFFSET := 0x0bc08000
 
+TARGET_KERNEL_ARCH := arm64
+TARGET_KERNEL_HEADER_ARCH := arm64
+
 BOARD_FLASH_BLOCK_SIZE := 131072 # (BOARD_KERNEL_PAGESIZE * 64)
 BOARD_MKBOOTIMG_ARGS += --base $(BOARD_KERNEL_BASE)
-BOARD_MKBOOTIMG_ARGS += --pagesize $(BOARD_KERNEL_PAGESIZE)
+BOARD_MKBOOTIMG_ARGS += --pagesize $(BOARD_KERNEL_PAGESIZE) --board "CY-CI8N-H816"
 BOARD_MKBOOTIMG_ARGS += --ramdisk_offset $(BOARD_RAMDISK_OFFSET)
 BOARD_MKBOOTIMG_ARGS += --kernel_offset $(BOARD_KERNEL_OFFSET)
 BOARD_MKBOOTIMG_ARGS += --tags_offset $(BOARD_KERNEL_TAGS_OFFSET)
@@ -116,15 +84,18 @@ BOARD_MKBOOTIMG_ARGS += --dtb $(TARGET_PREBUILT_DTB)
 BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
 BOARD_MKBOOTIMG_ARGS += --dtb_offset $(BOARD_DTB_OFFSET)
 
-# Hack to get keymaster to recognize the key files & prevent anti rollback
-PLATFORM_SECURITY_PATCH := 2127-12-31
-VENDOR_SECURITY_PATCH := $(PLATFORM_SECURITY_PATCH)
-PLATFORM_VERSION := 127
-PLATFORM_VERSION_LAST_STABLE := $(PLATFORM_VERSION)
+# File system type
+BOARD_HAS_LARGE_FILESYSTEM := true
+BOARD_BOOTIMAGE_PARTITION_SIZE := 0x2000000 # 33554432
+BOARD_SYSTEMIMAGE_FILE_SYSTEM_TYPE := erofs
+BOARD_SYSTEM_EXTIMAGE_FILE_SYSTEM_TYPE := erofs
+BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE := f2fs
+BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := erofs
+BOARD_PRODUCTIMAGE_FILE_SYSTEM_TYPE := erofs
 
-#PLATFORM_SECURITY_PATCH := 2022-11-05
-#VENDOR_SECURITY_PATCH := 2022-11-05
-#PLATFORM_VERSION := 12
+# Partitions
+TARGET_USERIMAGES_USE_EXT4 := true
+TARGET_USERIMAGES_USE_F2FS := true
 
 # Recovery
 TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
@@ -133,26 +104,38 @@ BOARD_HAS_NO_SELECT_BUTTON := true
 TARGET_NO_RECOVERY := true
 TW_HAS_NO_RECOVERY_PARTITION := true
 
+# Workaround for copying error vendor files to recovery ramdisk
+TARGET_COPY_OUT_PRODUCT := product
+TARGET_COPY_OUT_VENDOR := vendor
+TARGET_COPY_OUT_SYSTEM_EXT = system_ext
+
+# Dynamic Partitions
+BOARD_SUPER_PARTITION_SIZE := 9126805504
+BOARD_SUPER_PARTITION_GROUPS := main
+BOARD_MAIN_SIZE := 9122611200 # (BOARD_SUPER_PARTITION_SIZE - 4194304 - 4MB)
+BOARD_MAIN_PARTITION_LIST := system vendor product system_ext odm
+
+# System as root
+BOARD_BUILD_SYSTEM_ROOT_IMAGE := false
+BOARD_SUPPRESS_SECURE_ERASE := true
+
+# Hack to get keymaster to recognize the key files & prevent anti rollback
+PLATFORM_VERSION := 13
+PLATFORM_VERSION_LAST_STABLE := $(PLATFORM_VERSION)
+PLATFORM_SECURITY_PATCH := 2099-12-31
+BOOT_SECURITY_PATCH := $(PLATFORM_SECURITY_PATCH)
+VENDOR_SECURITY_PATCH := $(PLATFORM_SECURITY_PATCH)
+
 # Crypto
 TW_INCLUDE_CRYPTO := false
 #TW_INCLUDE_CRYPTO := true
 #TW_INCLUDE_CRYPTO_FBE := true
 #TW_INCLUDE_FBE_METADATA_DECRYPT := true
 #TW_USE_FSCRYPT_POLICY := 2
+
 # Metadata
 BOARD_USES_METADATA_PARTITION := true
 BOARD_ROOT_EXTRA_FOLDERS += metadata tranfs
-
-# Additional binaries & libraries needed for recovery
-#TARGET_RECOVERY_DEVICE_MODULES += \
-#    libkeymaster4 \
-#    libkeymaster41 \
-#    libpuresoftkeymasterdevice
-
-#TW_RECOVERY_ADDITIONAL_RELINK_LIBRARY_FILES += \
-#    $(TARGET_OUT_SHARED_LIBRARIES)/libkeymaster4.so \
-#    $(TARGET_OUT_SHARED_LIBRARIES)/libkeymaster41.so \
-#    $(TARGET_OUT_SHARED_LIBRARIES)/libpuresoftkeymasterdevice.so
 
 # Properties
 TARGET_SYSTEM_PROP += $(DEVICE_PATH)/system.prop
@@ -190,27 +173,27 @@ BOARD_AVB_RECOVERY_ADD_HASH_FOOTER_ARGS += \
 # TWRP specific build flags
 RECOVERY_SDCARD_ON_DATA := true
 TW_EXCLUDE_DEFAULT_USB_INIT := true
+TARGET_USES_MKE2FS := true
 TW_INCLUDE_NTFS_3G := true
 TW_USE_TOOLBOX := true
 TW_DEFAULT_LANGUAGE := ru
 TW_EXTRA_LANGUAGES := false
-#TARGET_USE_CUSTOM_LUN_FILE_PATH := /config/usb_gadget/g1/functions/mass_storage.0/lun.%d/file
-TARGET_USE_CUSTOM_LUN_FILE_PATH := /config/usb_gadget/g1/functions/mass_storage.usb0/lun.%d/file
-TW_DEVICE_VERSION := Tecno Camon 19 Pro_221202V1668 by lopestom
+TARGET_USE_CUSTOM_LUN_FILE_PATH := "/config/usb_gadget/g1/functions/mass_storage.usb0/lun.%d/file"
+TW_DEVICE_VERSION := TC 19 Pro_230606V290_V250_V433 by lopestom
 TARGET_RECOVERY_LCD_BACKLIGHT_PATH := \"/sys/class/leds/lcd-backlight/brightness\"
 TW_BRIGHTNESS_PATH := /sys/class/leds/lcd-backlight/brightness
 TW_MAX_BRIGHTNESS := 255
 TW_DEFAULT_BRIGHTNESS := 130
-TARGET_USES_MKE2FS := true
-TW_EXCLUDE_TWRPAPP := true
 TW_NO_SCREEN_BLANK := true
-TW_SKIP_COMPATIBILITY_CHECK := true
+#TW_SKIP_COMPATIBILITY_CHECK := true
 #TW_SCREEN_BLANK_ON_BOOT := true
 TW_INPUT_BLACKLIST := "hbtp_vm"
 TW_USE_MODEL_HARDWARE_ID_FOR_DEVICE_ID := true
-#TW_USE_SERIALNO_PROPERTY_FOR_DEVICE_ID := true
+TW_INCLUDE_FASTBOOTD := true
 
+TW_EXCLUDE_TWRPAPP := true
 TW_EXCLUDE_APEX := true
+
 BOARD_USE_FRAMEBUFFER_ALPHA_CHANNEL := true
 TARGET_DISABLE_TRIPLE_BUFFERING := false
 
@@ -219,33 +202,33 @@ BOARD_CHARGER_ENABLE_SUSPEND := true
 BOARD_CHARGER_DISABLE_INIT_BLANK := true
 
 # Storage
-TW_HAS_MTP := true
-TW_MTP_DEVICE := /dev/mtp_usb
-TW_INTERNAL_STORAGE_PATH := "/data/media/0"
-TW_INTERNAL_STORAGE_MOUNT_POINT := "data"
-TW_EXTERNAL_STORAGE_PATH := "/external_sd"
-TW_EXTERNAL_STORAGE_MOUNT_POINT := "external_sd"
-TW_DEFAULT_EXTERNAL_STORAGE := true
+#TW_HAS_MTP := true
+#TW_MTP_DEVICE := /dev/mtp_usb
+#TW_INTERNAL_STORAGE_PATH := "/data/media/0"
+#TW_INTERNAL_STORAGE_MOUNT_POINT := "data"
+#TW_EXTERNAL_STORAGE_PATH := "/external_sd"
+#TW_EXTERNAL_STORAGE_MOUNT_POINT := "external_sd"
+#TW_DEFAULT_EXTERNAL_STORAGE := true
 
 # resetprop and magiskboot
 TW_INCLUDE_RESETPROP := true
+TW_INCLUDE_LIBRESETPROP := true
+
+# Advanced: RAMDISK process - TWRP option
 TW_INCLUDE_REPACKTOOLS := true
 
 # Resolution
 TW_THEME := portrait_hdpi
 TARGET_SCREEN_WIDTH := 1080
 TARGET_SCREEN_HEIGHT := 2460
-TW_Y_OFFSET := 50
-TW_H_OFFSET := -50
+
+# Statusbar icons flags 1080 x 2400
+TW_STATUS_ICONS_ALIGN := center
+#TW_CUSTOM_CPU_POS := 50
+TW_CUSTOM_CLOCK_POS := 310
+#TW_CUSTOM_BATTERY_POS := 800
 
 # Debug
 TWRP_INCLUDE_LOGCAT := true
 TARGET_USES_LOGD := true
 
-#TW_CRYPTO_FS_TYPE := "f2fs"
-#TW_CRYPTO_REAL_BLKDEV := "/dev/block/platform/bootdevice/by-name/userdata"
-#TW_CRYPTO_MNT_POINT := "/data"
-#TW_CRYPTO_FS_OPTIONS := "rw,lazytime,seclabel,nosuid,nodev,noatime,background_gc=on,discard,no_heap,user_xattr,inline_xattr,acl,inline_data,inline_dentry,extent_cache,mode=adaptive,active_logs=6,reserve_root=55451,resuid=0,resgid=1065,inlinecrypt,alloc_mode=default,fsync_mode=posix 0 0"
-#TW_CRYPTO_FS_OPTIONS := "rw,seclabel,nosuid,nodev,noatime,noauto_da_alloc,inlinecrypt,resgid=1065,errors=panic,data=ordered"
-#/dev/block/dm-7 /data f2fs rw,lazytime,seclabel,nosuid,nodev,noatime,background_gc=on,discard,no_heap,user_xattr,inline_xattr,acl,inline_data,inline_dentry,extent_cache,mode=adaptive,active_logs=6,reserve_root=55451,resuid=0,resgid=1065,inlinecrypt,alloc_mode=default,fsync_mode=posix 0 0
-#/dev/block/dm-7 /data/user/0 f2fs rw,lazytime,seclabel,nosuid,nodev,noatime,background_gc=on,discard,no_heap,user_xattr,inline_xattr,acl,inline_data,inline_dentry,extent_cache,mode=adaptive,active_logs=6,reserve_root=55451,resuid=0,resgid=1065,inlinecrypt,alloc_mode=default,fsync_mode=posix 0 0

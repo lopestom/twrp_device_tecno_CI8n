@@ -1,6 +1,6 @@
 #
-# Copyright (C) 2022 The Android Open Source Project
-# Copyright (C) 2022 The TWRP Open Source Project
+# Copyright (C) 2023 The Android Open Source Project
+# Copyright (C) 2023 The TWRP Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -45,6 +45,8 @@ PRODUCT_MANUFACTURER := TECNO
 PRODUCT_BUILD_PROP_OVERRIDES += \
     TARGET_DEVICE=TECNO-CI8n \
     PRODUCT_NAME=CI8n-GL \
-    PRIVATE_BUILD_DESC="vnd_ci8_h816-user 12 SP1A.210812.016 176455 release-keys"
+    PRIVATE_BUILD_DESC="vnd_ci8_h816-user 13 TP1A.220624.014 346533 release-keys"
 
-BUILD_FINGERPRINT := TECNO/CI8n-GL/TECNO-CI8n:12/SP1A.210812.016/221202V1668:user/release-keys
+BUILD_FINGERPRINT := TECNO/CI8n-GL/TECNO-CI8n:13/TP1A.220624.014/230606V433:user/release-keys
+# vnd_ci8_h816-user 12 SP1A.210812.016 346533 release-keys
+# TECNO/CI8n-GL/TECNO-CI8n:12/SP1A.210812.016/230606V290:user/release-keys
