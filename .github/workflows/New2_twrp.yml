@@ -1,4 +1,4 @@
-name: Building TWRP
+name: Building TWRP ApplyPatch
 
 on:
 #  release:
@@ -21,8 +21,6 @@ env:
 # MANIFEST: https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp -b twrp-12.1
 #  DT_BRANCH: WIP
 
-on:
-  workflow_dispatch:
     inputs:
       APPLYPATCH:
         description: 'Apply diff.patch (true or false)'
