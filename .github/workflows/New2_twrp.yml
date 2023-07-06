@@ -18,20 +18,9 @@ env:
   DT_LINK: https://github.com/lopestom/twrp_device_tecno_CI8n
   DT_PATH: device/tecno/CI8n
   TARGET: bootimage
+  TZ: Asia/manila
 # MANIFEST: https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp -b twrp-12.1
 #  DT_BRANCH: WIP
-
-on:
-  workflow_dispatch:
-    inputs:
-      APPLYPATCH:
-        description: 'Apply diff.patch (true or false)'
-        required: true
-        default: 'yes'
-        type: choice
-        options:
-        - yes
-        - no
 
 jobs:
   build:
@@ -82,6 +71,11 @@ jobs:
        repo sync -c -j8 --force-sync --no-clone-bundle --no-tags
        rm -rf .repo
 
+    - name: Sync recovery source and device tree
+      run: |
+       cd twrp/bootable/recovery
+       git clone https://github.com/lopestom/bootable_recovery_twrp.git -b android-12.1
+
     - name: Checkout device tree
       uses: actions/checkout@v2
       with:
@@ -91,13 +85,6 @@ jobs:
       uses: pierotofy/set-swap-space@master
       with:
        swap-size-gb: 12
-
-    - name: Apply custom diff.patch
-      if: github.event.inputs.APPLYPATCH == 'true'
-      run: |
-        bash /home/runner/work/twrp_device_tecno_CI8n/twrp_device_tecno_CI8n/twrp/$DT_PATH/patches/apply-patches.sh
-      working-directory: ${{ steps.pwd.outputs.workspace-folder }}
-      continue-on-error: false
 
     - name: Build
       run: |
