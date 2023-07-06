@@ -73,7 +73,7 @@ jobs:
 
     - name: Sync recovery source and device tree
       run: |
-       cd ./bootable/recovery
+       cd twrp/bootable/recovery
        git clone https://github.com/lopestom/bootable_recovery_twrp.git -b android-12.1
 
     - name: Checkout device tree
