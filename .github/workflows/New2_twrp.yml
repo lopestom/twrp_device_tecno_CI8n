@@ -14,14 +14,28 @@ on:
   
     inputs:
       MANIFEST:
-        default: 'https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp -b twrp-12.1'
+        description: 'MANIFEST'
+        required: true
+        default: 'https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp'
+      MANIFEST_BRANCH:
+        description: 'MANIFEST_BRANCH'
+        required: true
+        default: 'twrp-12.1'
       DEVICE:
+        description: 'DEVICE'
+        required: true
         default: 'CI8n'
       DT_LINK:
+        description: 'DT_LINK'
+        required: true
         default: 'https://github.com/lopestom/twrp_device_tecno_CI8n'
       DT_PATH:
+        description: 'DT_PATH'
+        required: true
         default: 'device/tecno/CI8n'
       TARGET:
+        description: 'TARGET'
+        required: true
         default: 'bootimage'
       TZ:
         default: 'Asia/manila'
@@ -45,6 +59,7 @@ jobs:
       run: |
         echo "::group::User Environment Variables"
         echo "MANIFEST: ${{ github.event.inputs.MANIFEST }}"
+        echo "Manifest Branch: ${{ github.event.inputs.MANIFEST_BRANCH }}"
         echo "DT_LINK: ${{ github.event.inputs.DT_LINK }}"
         echo "DT_PATH: ${{ github.event.inputs.DT_PATH }}"
         echo "DEVICE: ${{ github.event.inputs.DEVICE }}"
@@ -89,7 +104,7 @@ jobs:
        PATH=~/bin:$PATH
        mkdir twrp
        cd twrp
-       repo init -u $MANIFEST --depth=1
+       repo init -u ${{ github.event.inputs.MANIFEST }} -b ${{ github.event.inputs.MANIFEST_BRANCH }} --depth=1
        repo sync -c -j8 --force-sync --no-clone-bundle --no-tags
        rm -rf .repo
 
