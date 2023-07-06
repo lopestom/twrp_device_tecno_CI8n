@@ -71,7 +71,7 @@ jobs:
        repo sync -c -j8 --force-sync --no-clone-bundle --no-tags
        rm -rf .repo
 
-    - name: Sync recovery source and device tree
+    - name: Test Applying patch
       run: |
        cd twrp/bootable/recovery
        git clone https://github.com/lopestom/bootable_recovery_twrp.git -b android-12.1
