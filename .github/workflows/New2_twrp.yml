@@ -1,7 +1,15 @@
-name: Building TWRP ApplyPatch
+name: Building TWRP
 
 on:
-
+#  release:
+#    types: [published]
+#  push:
+#    branches:
+#      - master
+#    paths:
+#      - '.config'
+#  schedule:
+#    - cron: 0 8 * * 5
   workflow_dispatch:
   
     inputs:
@@ -33,6 +41,16 @@ jobs:
     permissions:
       contents: write
     steps:
+    - name: Display Run Parameters
+      run: |
+        echo "::group::User Environment Variables"
+        echo "MANIFEST: ${{ github.event.inputs.MANIFEST }}"
+        echo "DT_LINK: ${{ github.event.inputs.DT_LINK }}"
+        echo "DT_PATH: ${{ github.event.inputs.DT_PATH }}"
+        echo "DEVICE: ${{ github.event.inputs.DEVICE }}"
+        echo "TZ: ${{ github.event.inputs.TZ }}"
+        echo "TARGET: ${{ github.event.inputs.TARGET }}"
+        echo "::endgroup::"
 
     - name: Checkout
       uses: actions/checkout@master
