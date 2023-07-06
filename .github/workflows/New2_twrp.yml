@@ -13,12 +13,13 @@ on:
   workflow_dispatch:
 
 env:
-  MANIFEST: https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp -b twrp-12.1
+  MANIFEST: https://github.com/brigudav/bootable_recovery_twrp -b android-12.1
   DEVICE: CI8n
   DT_LINK: https://github.com/lopestom/twrp_device_tecno_CI8n
   DT_PATH: device/tecno/CI8n
   TARGET: bootimage
   TZ: Asia/manila
+# MANIFEST: https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp -b twrp-12.1
 #  DT_BRANCH: WIP
 
 jobs:
