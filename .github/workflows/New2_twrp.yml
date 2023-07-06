@@ -73,8 +73,6 @@ jobs:
 
     - name: Sync recovery source and device tree
       run: |
-       PATH=~/bin:$PATH
-       mkdir twrp
        cd ./bootable/recovery
        git clone https://github.com/lopestom/bootable_recovery_twrp.git -b android-12.1
 
