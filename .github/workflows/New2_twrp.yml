@@ -1,36 +1,30 @@
 name: Building TWRP ApplyPatch
 
 on:
-#  release:
-#    types: [published]
-#  push:
-#    branches:
-#      - master
-#    paths:
-#      - '.config'
-#  schedule:
-#    - cron: 0 8 * * 5
+
   workflow_dispatch:
-
-env:
-  MANIFEST: https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp -b twrp-12.1
-  DEVICE: CI8n
-  DT_LINK: https://github.com/lopestom/twrp_device_tecno_CI8n
-  DT_PATH: device/tecno/CI8n
-  TARGET: bootimage
-
-input:
-
-  APPLYPATCH:
-    description: 'Apply diff.patch (true or false)'
-    required: true
-    default: 'yes'
-    type: choice
-    options:
-    - yes
-    - no
-# MANIFEST: https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp -b twrp-12.1
-#  DT_BRANCH: WIP
+  
+    inputs:
+      MANIFEST:
+        default: 'https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp -b twrp-12.1'
+      DEVICE:
+        default: 'CI8n'
+      DT_LINK:
+        default: 'https://github.com/lopestom/twrp_device_tecno_CI8n'
+      DT_PATH:
+        default: 'device/tecno/CI8n'
+      TARGET:
+        default: 'bootimage'
+      TZ:
+        default: 'Asia/manila'
+      APPLYPATCH:
+        description: 'Apply diff.patch (true or false)'
+        required: true
+        default: 'yes'
+        type: choice
+        options:
+        - yes
+        - no
 
 jobs:
   build:
