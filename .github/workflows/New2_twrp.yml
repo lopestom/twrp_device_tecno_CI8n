@@ -18,18 +18,19 @@ env:
   DT_LINK: https://github.com/lopestom/twrp_device_tecno_CI8n
   DT_PATH: device/tecno/CI8n
   TARGET: bootimage
+
+input:
+
+  APPLYPATCH:
+    description: 'Apply diff.patch (true or false)'
+    required: true
+    default: 'yes'
+    type: choice
+    options:
+    - yes
+    - no
 # MANIFEST: https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp -b twrp-12.1
 #  DT_BRANCH: WIP
-
-    inputs:
-      APPLYPATCH:
-        description: 'Apply diff.patch (true or false)'
-        required: true
-        default: 'yes'
-        type: choice
-        options:
-        - yes
-        - no
 
 jobs:
   build:
