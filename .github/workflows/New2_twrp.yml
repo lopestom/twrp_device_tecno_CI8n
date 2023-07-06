@@ -70,7 +70,14 @@ jobs:
        repo init -u $MANIFEST --depth=1
        repo sync -c -j8 --force-sync --no-clone-bundle --no-tags
        rm -rf .repo
-             
+
+    - name: Sync recovery source and device tree
+      run: |
+       PATH=~/bin:$PATH
+       mkdir twrp
+       cd ./bootable/recovery
+       git clone https://github.com/lopestom/bootable_recovery_twrp.git -b android-12.1
+
     - name: Checkout device tree
       uses: actions/checkout@v2
       with:
