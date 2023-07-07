@@ -111,7 +111,7 @@ jobs:
     - name: Checkout device tree
       uses: actions/checkout@v2
       with:
-       path: twrp/${{ github.event.inputs.DEVICE_PATH }}
+       path: ${{ github.event.inputs.DEVICE_PATH }}
 
     - name: Set Swap Space
       uses: pierotofy/set-swap-space@master
@@ -121,7 +121,7 @@ jobs:
     - name: Apply custom diff.patch
       if: github.event.inputs.APPLYPATCH == 'true'
       run: |
-        bash ${GITHUB_WORKSPACE}/twrp/${{ github.event.inputs.DEVICE_PATH }}/patches/apply-patches.sh
+        bash ${GITHUB_WORKSPACE}/${{ github.event.inputs.DEVICE_PATH }}/patches/apply-patches.sh
       working-directory: ${{ steps.pwd.outputs.workspace-folder }}
       continue-on-error: true
 
