@@ -111,7 +111,7 @@ jobs:
     - name: Checkout device tree
       uses: actions/checkout@v2
       with:
-       path: twrp_${{ github.event.inputs.DEVICE_PATH }}
+       working-directory: ${{ steps.pwd.outputs.workspace-folder }}
 
     - name: Set Swap Space
       uses: pierotofy/set-swap-space@master
