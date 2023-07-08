@@ -123,7 +123,6 @@ jobs:
       if: github.event.inputs.APPLYPATCH == 'true'
       run: |
         bash workspace/${{ github.event.inputs.DEVICE_PATH }}/patches/apply-patches.sh
-      working-directory: ${{ steps.pwd.outputs.workspace-folder }}
       continue-on-error: false
 
     - name: Building recovery
