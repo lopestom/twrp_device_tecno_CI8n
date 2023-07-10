@@ -113,7 +113,6 @@ jobs:
       with:
        path: workspace/${{ github.event.inputs.DEVICE_PATH }}
 
-
     - name: Set Swap Space
       uses: pierotofy/set-swap-space@master
       with:
@@ -122,8 +121,12 @@ jobs:
     - name: Apply custom diff.patch
       if: github.event.inputs.APPLYPATCH == 'true'
       run: |
-        bash workspace/${{ github.event.inputs.DEVICE_PATH }}/patches/apply-patches.sh
+        cd bootable/recovery
+        patch -p1 < workspace/device/tecno/CI8n/patches/0001-revert-save-settings-file-in-persist.patch
+        cd ../..
       continue-on-error: false
+
+#        bash workspace/${{ github.event.inputs.DEVICE_PATH }}/patches/apply-patches.sh
 
     - name: Building recovery
       run: |
